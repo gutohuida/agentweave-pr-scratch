@@ -1,0 +1,14 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  ci-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail when the FAIL marker is present
+        run: |
+          if [ -e FAIL ]; then echo "FAIL marker present"; exit 1; fi
+          echo "no FAIL marker"
